@@ -117,3 +117,21 @@ DisableRealtimeMonitoring = 1
 This investigation highlights the importance of layered security in modern SOC operations.  
 
 As attackers evolve their techniques, defenders must move beyond simple IOC-based detection and implement behavioral and host-based monitoring for effective threat detection and response.
+
+## Adversary Evolution
+
+During the investigation, the attacker adapted their techniques after initial detections were blocked.
+
+A message from the adversary revealed:
+- Introduction of a new sample: `sample5.exe`
+- Shift of malicious logic to a backend server
+- Reduced host-based indicators
+- Increased reliance on network-based behavior
+
+This forced a transition from:
+- Static detection (hashes)
+- Network indicators (IP/DNS)
+
+ To behavioral detection strategies
+
+This demonstrates real-world adversary adaptation and the need for layered defense.
