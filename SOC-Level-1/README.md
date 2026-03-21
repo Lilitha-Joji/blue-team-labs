@@ -135,3 +135,15 @@ This forced a transition from:
  To behavioral detection strategies
 
 This demonstrates real-world adversary adaptation and the need for layered defense.
+
+## Behavioral Insight
+
+Observed consistent network traffic of similar byte size at regular 30-minute intervals.
+
+This pattern suggests:
+- Automated communication rather than user activity
+- Possible beaconing behavior to a command-and-control (C2) server
+- Potential scheduled task execution
+
+Such periodic behavior is a strong indicator of malware persistence and remote control mechanisms.
+
