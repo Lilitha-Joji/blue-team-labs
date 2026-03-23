@@ -156,3 +156,11 @@ The malware demonstrates characteristics of a Trojan, including stealth executio
 This investigation highlights the importance of analyzing suspicious attachments in a controlled environment.  
 
 By leveraging sandbox analysis and IOC extraction, defenders can detect, understand, and mitigate phishing-based malware threats effectively.
+
+##  Analysis Environment
+
+![Sandbox Overview](images/sandbox-overview.png)
+
+## Indicators of Compromise (IOCs)
+
+![Network Activity](images/network-activity.png)
