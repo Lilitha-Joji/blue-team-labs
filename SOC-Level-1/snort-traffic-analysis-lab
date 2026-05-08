@@ -1,0 +1,224 @@
+# Snort Traffic Analysis Lab (Complete Notes)
+
+This document explains how Snort works as a Network Intrusion Detection and Prevention System (IDS/IPS), including sniffing, logging, ASCII mode, binary logs, file permissions, and offline packet analysis.
+
+---
+
+# 1. What is Snort?
+
+Snort is an open-source Network Intrusion Detection and Prevention System (NIDS/NIPS) used to monitor network traffic, detect malicious activity, and log packets for analysis.
+
+It can operate in three main roles:
+- Packet sniffer
+- Packet logger
+- Intrusion detection system (IDS)
+- Intrusion prevention system (IPS)
+
+---
+
+# 2. IDS vs IPS Overview
+
+## Intrusion Detection System (IDS)
+- Passive monitoring system
+- Detects malicious activity
+- Generates alerts only
+- Does NOT stop traffic
+
+Types:
+- NIDS (Network IDS): monitors entire network
+- HIDS (Host IDS): monitors a single machine
+
+---
+
+## Intrusion Prevention System (IPS)
+- Active protection system
+- Detects AND blocks attacks
+- Can terminate malicious connections
+
+Types:
+- NIPS (Network IPS)
+- HIPS (Host IPS)
+- WIPS (Wireless IPS)
+- Behaviour-based IPS (uses baselining)
+
+---
+
+# 3. Snort Sniffer Mode
+
+Sniff live traffic:
+
+sudo snort -v
+sudo snort -vd
+sudo snort -de
+sudo snort -X
+sudo snort -v -i eth0
+
+Flags:
+- -v = verbose (IP/ports/protocols)
+- -d = packet payload
+- -e = Ethernet headers
+- -X = full packet hex view
+- -i = select interface
+
+---
+
+# 4. Snort Logger Mode
+
+## Binary logging (default)
+
+sudo snort -dev -l .
+
+Output:
+- Single binary file (PCAP format)
+- Stored in current directory
+
+Example file:
+snort.log.1638459842
+
+This format is NOT human readable and requires tools like Snort, tcpdump, or Wireshark.
+
+---
+
+## ASCII logging (-K ASCII)
+
+sudo snort -dev -K ASCII -l .
+
+Output:
+- Human-readable logs
+- Organized into folders per IP address
+
+Example structure:
+192.168.175.129/
+ICMP_ECHO/
+UDP:53/
+UDP:123/
+
+142.250.187.110/
+ICMP_ECHO/
+UDP:53/
+
+Why IP folders exist:
+Snort groups logs based on communicating devices (IP addresses) to make analysis easier.
+
+---
+
+# 5. Snort Reader Mode (-r)
+
+Read saved logs:
+
+sudo snort -r snort.log.1638459842
+
+What happens:
+- Snort reads a saved binary packet file
+- Replays traffic internally
+- Displays packets like live capture
+
+Example output:
+192.168.175.129 -> 142.250.187.110
+ICMP Type:8 ECHO REQUEST
+Seq:49
+
+---
+
+# 6. Packet Filtering (BPF)
+
+Filter while reading logs:
+
+sudo snort -r logname.log icmp
+sudo snort -r logname.log tcp
+sudo snort -r 'udp and port 53'
+sudo snort -r logname.log -X
+
+Meaning:
+- Only show matching traffic
+- Uses Berkeley Packet Filter (BPF)
+
+---
+
+# 7. Limit Packet Processing
+
+sudo snort -dvr logname.log -n 10
+
+Meaning:
+- Process only first 10 packets
+- Useful for quick inspection
+
+---
+
+# 8. Log File Ownership (Important)
+
+Snort runs as root:
+
+sudo snort ...
+
+So log files belong to root user.
+
+Fix permissions:
+
+sudo chown username file
+
+Recursive fix:
+
+sudo chown username -R directory
+
+Why this matters:
+- Without permission you cannot read logs
+- Root owns all system-generated capture files
+
+---
+
+# 9. Binary vs ASCII Logs
+
+Binary logs:
+- One file
+- Not human readable
+- Used for forensic analysis
+- Compatible with Snort, tcpdump, Wireshark
+
+ASCII logs:
+- Multiple folders
+- Human readable
+- Grouped by IP and protocol
+- Easier for beginners
+
+---
+
+# 10. Tools Used
+
+- Snort (packet analysis + IDS/IPS)
+- tcpdump (terminal packet viewer)
+- Wireshark (GUI packet analyzer)
+
+Example:
+tcpdump -r snort.log.1638459842 -ntc 10
+
+---
+
+# 11. Key Concepts Summary
+
+- Snort can sniff, log, and replay traffic
+- Sniffer mode = live monitoring
+- Logger mode = packet storage
+- Reader mode = offline analysis
+- ASCII mode = readable logs grouped by IP
+- Binary mode = forensic PCAP files
+- File ownership matters in Linux environments
+
+---
+
+# 12. Mental Model
+
+LIVE MODE:
+Network → Snort → Alerts/Logs
+
+LOG MODE:
+Network → Snort → Stored packets
+
+READ MODE:
+Stored packets → Snort → Analysis output
+
+---
+
+# 13. Final Understanding
+
+Snort is a full network security analysis tool used in SOC environments to capture, store, and analyze malicious or suspicious network traffic.
