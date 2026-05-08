@@ -182,8 +182,3 @@ This project simulates a real SOC investigation workflow where analysts:
 
 ---
 
-## Conclusion
-
-Even without advanced tools, SOC analysts can detect full-scale cyber attacks using **basic Linux commands and log correlation techniques**. Understanding patterns in logs is a core cybersecurity skill for entry-level SOC roles.
-
-##
