@@ -1,0 +1,42 @@
+Overview
+
+This project demonstrates how to analyze web server logs to detect common attack techniques including directory fuzzing, brute-force attacks, and SQL injection (SQLi).
+
+Attack Summary
+1. Directory Fuzzing (Reconnaissance)
+Attacker Tool (User-Agent): FFUF v2.1.0
+<img width="1906" height="825" alt="image" src="https://github.com/user-attachments/assets/f78b8278-a4a9-41a6-8a2f-ba4cfade8731" />
+
+
+The attacker used FFUF to scan the web application for hidden directories and files.
+
+2. Brute Force Attack
+Target Page: /login.php
+<img width="1907" height="793" alt="image" src="https://github.com/user-attachments/assets/a9192524-25f6-465c-a39f-0b2935886429" />
+
+
+The attacker performed repeated login attempts using automated requests, indicating a brute-force attack.
+
+3. SQL Injection Attack
+Target Page: /changeusername.php
+Payload Used:
+' OR '1'='1
+<img width="1918" height="835" alt="image" src="https://github.com/user-attachments/assets/dbc9ae23-e65d-4fbf-82b7-d3c590e002af" />
+
+
+This payload attempts to bypass authentication or manipulate backend SQL queries by forcing a true condition.
+
+Key Indicators of Attack
+Automated fuzzing tool detected (FFUF)
+Repeated login requests
+SQL injection payload detected in request logs
+Suspicious query manipulation attempts
+Skills Demonstrated
+Web log analysis
+Attack pattern recognition
+SQL injection identification
+Brute-force detection
+Reconnaissance activity identification
+Tools Used
+Log analysis (web server logs)
+CyberChef (payload decoding)
