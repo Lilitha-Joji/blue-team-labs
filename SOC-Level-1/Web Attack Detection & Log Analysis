@@ -1,42 +1,100 @@
 Overview
 
-This project demonstrates how to analyze web server logs to detect common attack techniques including directory fuzzing, brute-force attacks, and SQL injection (SQLi).
+This project demonstrates how to analyze web server logs to identify and understand common web attack techniques. The investigation focuses on three main attack types: directory fuzzing (reconnaissance), brute-force authentication attempts, and SQL injection (SQLi).
 
-Attack Summary
-1. Directory Fuzzing (Reconnaissance)
-Attacker Tool (User-Agent): FFUF v2.1.0
-<img width="1906" height="825" alt="image" src="https://github.com/user-attachments/assets/f78b8278-a4a9-41a6-8a2f-ba4cfade8731" />
+The goal is to simulate a real-world Security Operations Center (SOC) log investigation by interpreting attack behavior from web server activity.
 
+Objectives
+Identify malicious patterns in web server logs
+Detect reconnaissance activity (directory fuzzing)
+Analyze brute-force login attempts
+Recognize SQL injection payloads
+Understand attacker progression through a web application
+Attack Analysis
+1. Directory Fuzzing (Reconnaissance Phase)
 
-The attacker used FFUF to scan the web application for hidden directories and files.
+The attacker performed directory fuzzing using an automated tool identified in the logs as:
 
-2. Brute Force Attack
+User-Agent: FFUF v2.1.0
+
+This indicates the use of a web content discovery tool to scan the application for hidden directories, files, and endpoints.
+
+Behavior observed:
+
+Rapid and automated requests to multiple endpoints
+Attempted access to non-public directories
+Presence of systematic scanning patterns
+
+Purpose:
+To discover hidden or unprotected resources such as admin panels, backup files, or login pages.
+
+2. Brute Force Attack (Authentication Phase)
+
+The attacker targeted the authentication endpoint:
+
 Target Page: /login.php
-<img width="1907" height="793" alt="image" src="https://github.com/user-attachments/assets/a9192524-25f6-465c-a39f-0b2935886429" />
 
+The logs show repeated POST requests to the login page in quick succession, indicating an automated brute-force attack.
 
-The attacker performed repeated login attempts using automated requests, indicating a brute-force attack.
+Behavior observed:
 
-3. SQL Injection Attack
+High frequency login attempts
+Repeated authentication failures
+Sudden successful login indicated by a 302 Found redirect
+
+Purpose:
+To gain unauthorized access by guessing valid username and password combinations using automation.
+
+3. SQL Injection Attack (Post-Authentication Exploitation)
+
+After gaining access, the attacker targeted:
+
 Target Page: /changeusername.php
-Payload Used:
+
+The attacker submitted SQL injection payloads in an attempt to manipulate backend database queries.
+
+Payload used:
+
 ' OR '1'='1
-<img width="1918" height="835" alt="image" src="https://github.com/user-attachments/assets/dbc9ae23-e65d-4fbf-82b7-d3c590e002af" />
+
+Behavior observed:
+
+Injection of logical conditions into input fields
+Attempt to bypass validation or authentication logic
+Exploitation of insecure query construction
+
+Purpose:
+To manipulate SQL queries and potentially gain unauthorized access to or modify database records.
+
+ Key Indicators of Malicious Activity
+Use of automated scanning tool (FFUF)
+High-volume login attempts in short time window
+Presence of SQL injection payloads in request logs
+Suspicious request patterns targeting multiple endpoints
+Authentication bypass indicators (HTTP 302 redirect after failures)
 
 
-This payload attempts to bypass authentication or manipulate backend SQL queries by forcing a true condition.
-
-Key Indicators of Attack
-Automated fuzzing tool detected (FFUF)
-Repeated login requests
-SQL injection payload detected in request logs
-Suspicious query manipulation attempts
 Skills Demonstrated
-Web log analysis
+Web server log analysis
 Attack pattern recognition
+Reconnaissance detection
+Brute-force detection analysis
 SQL injection identification
-Brute-force detection
-Reconnaissance activity identification
-Tools Used
-Log analysis (web server logs)
-CyberChef (payload decoding)
+SOC-style incident reconstruction
+
+Tools & Concepts Used
+Web server access log analysis
+CyberChef (for payload decoding)
+Basic SQL injection understanding
+Web application security concepts
+
+SOC investigation methodology
+Summary
+
+This investigation demonstrates how attackers typically progress through a web application in stages:
+
+Reconnaissance (directory fuzzing)
+Credential attack (brute force login attempts)
+Exploitation (SQL injection after access is gained)
+
+By analyzing logs, it is possible to reconstruct the full attack chain and understand attacker behavior even without seeing the full request payloads.
