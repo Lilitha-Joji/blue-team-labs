@@ -23,15 +23,6 @@ Event ID: 4625
 Source IP: 10.10.53.248
 Pattern: Multiple authentication failures (password spraying / brute force behavior)
 
-## Failed Login Attempts
-
-![Failed Login](screenshots/failed-login)
-
----
-
-## Additional Failed Login Evidence
-
-![Failed Login 2](screenshots/failed-login2)
 
 2. Compromised User Account
 
@@ -41,9 +32,6 @@ Event ID: 4624
 Account: Administrator
 Result: Successful authentication after failed attempts
 
-## Initial Access
-
-![Initial Access](screenshots/initial-access)
 
 3. Malicious RDP Session
 
