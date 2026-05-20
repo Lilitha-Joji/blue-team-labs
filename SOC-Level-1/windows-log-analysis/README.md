@@ -25,13 +25,13 @@ Pattern: Multiple authentication failures (password spraying / brute force behav
 
 ## Failed Login Attempts
 
-![Failed Login](screenshots/failed-login.png)
+![Failed Login](screenshots/failed-login)
 
 ---
 
 ## Additional Failed Login Evidence
 
-![Failed Login 2](screenshots/failed-login2.png)
+![Failed Login 2](screenshots/failed-login2)
 
 2. Compromised User Account
 
@@ -43,7 +43,7 @@ Result: Successful authentication after failed attempts
 
 ## Initial Access
 
-![Initial Access](screenshots/initial-access.png)
+![Initial Access](screenshots/initial-access)
 
 3. Malicious RDP Session
 
