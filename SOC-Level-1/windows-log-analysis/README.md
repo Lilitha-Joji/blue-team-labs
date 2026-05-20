@@ -22,6 +22,17 @@ Repeated failed login attempts were observed targeting the system.
 Event ID: 4625
 Source IP: 10.10.53.248
 Pattern: Multiple authentication failures (password spraying / brute force behavior)
+
+## Failed Login Attempts
+
+![Failed Login](failed-login.png)
+
+---
+
+## Additional Failed Login Evidence
+
+![Failed Login 2](failed-login2.png)
+
 2. Compromised User Account
 
 The attacker successfully gained access to the system using a valid account.
@@ -29,6 +40,11 @@ The attacker successfully gained access to the system using a valid account.
 Event ID: 4624
 Account: Administrator
 Result: Successful authentication after failed attempts
+
+## Initial Access
+
+![Initial Access](initial-access.png)
+
 3. Malicious RDP Session
 
 The attacker established a remote desktop session after successful authentication.
