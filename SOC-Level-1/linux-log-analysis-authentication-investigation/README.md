@@ -2,28 +2,21 @@
 
 ## Overview
 
-This project demonstrates basic Linux log analysis using authentication logs located in `/var/log/auth.log`.
+This investigation focused on analyzing Linux authentication logs located in:
 
-The objective was to identify:
+```bash
+/var/log/auth.log
+```
 
-1. IP addresses responsible for failed SSH login attempts.
-2. User account creation events.
-3. Privilege escalation and group membership modifications.
+The goal was to identify failed SSH login attempts and investigate user account creation events.
 
-## Skills Demonstrated
-
-* Linux log analysis
-* Authentication log investigation
-* SSH brute-force detection
-* User account monitoring
-* Privilege escalation detection
-* Command-line log filtering using grep
+---
 
 ## Investigation 1: Failed SSH Logins
 
 ### Objective
 
-Identify IP addresses responsible for failed SSH authentication attempts.
+Identify the IP address responsible for multiple failed SSH login attempts.
 
 ### Command Used
 
@@ -33,21 +26,21 @@ cat /var/log/auth.log | grep -E "Failed"
 
 ### Findings
 
-Multiple failed SSH login attempts were identified.
-
-Suspicious Source IP:
+The following IP address attempted to authenticate against multiple user accounts:
 
 ```text
 10.14.94.82
 ```
 
-This IP attempted authentication against multiple user accounts, which may indicate password spraying or brute-force activity.
+This activity may indicate brute-force or password-spraying behavior.
+
+---
 
 ## Investigation 2: User Creation and Privilege Escalation
 
 ### Objective
 
-Identify newly created users and determine whether they were granted administrative privileges.
+Identify newly created users and determine whether they received administrative privileges.
 
 ### Command Used
 
@@ -63,24 +56,23 @@ A user named:
 xerves
 ```
 
-was created and subsequently added to the `sudo` group.
+was created and added to the sudo group.
 
-Relevant indicators:
+This grants administrative privileges and should be reviewed during an incident investigation.
 
-* User creation event (`useradd`)
-* Group modification event (`usermod`)
-* Administrative privilege assignment (`sudo` group)
+---
 
-This activity should be reviewed during incident response because attackers often create privileged accounts to maintain persistence.
+## Evidence
 
-## Key Takeaways
+![Linux Investigation Evidence](linux.png)
 
-Linux authentication logs provide valuable visibility into:
+---
 
-* User logins
-* Failed authentication attempts
-* Account creation
-* Privilege escalation
-* Administrative activity
+## Skills Demonstrated
 
-These logs are often one of the first sources reviewed during Linux incident investigations.
+- Linux Log Analysis
+- Authentication Log Investigation
+- SSH Attack Detection
+- User Account Monitoring
+- Privilege Escalation Analysis
+- Command-Line Log Filtering
