@@ -27,7 +27,7 @@ Brand impersonation is a common phishing technique in which attackers misuse the
 
 ### Evidence 1 – Home Depot Impersonation
 
-![Home Depot Impersonation](../evidence/home-depot-impersonation.png)
+![Home Depot Impersonation](../../images/home-depot-impersonation.png)
 
 ## 4. Original Email Analysis
 
@@ -43,7 +43,7 @@ This discrepancy is an important observation when assessing the authenticity of 
 
 ### Evidence 2 – Original Email
 
-![Original Email](../evidence/original-email.png)
+![Original Email](../../images/original-email.png)
 
 ## 5. Email Header Analysis
 
@@ -69,7 +69,7 @@ The IP address was extracted from the `X-Originating-IP` header and documented a
 
 ### Evidence 3 – Original IP
 
-![Original IP](../evidence/original-ip.png)
+![Original IP](../../images/original-ip.png)
 
 ## 6. Authentication-Results Analysis
 
@@ -87,7 +87,7 @@ The specific SPF, DKIM and DMARC outcomes would need to be examined separately b
 
 ### Evidence 4 – Authentication Results
 
-![Authentication Results](../evidence/authentication-results.png)
+![Authentication Results](../../images/authentication-results.png)
 
 ## 7. Indicators of Compromise (IOCs)
 
