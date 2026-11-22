@@ -3,31 +3,31 @@
 
 ## 1. Executive Summary
 
-This investigation focuses on a phishing email impersonating Home Depot. The analysis was conducted using the email sample `email3.eml` in the TryHackMe environment.
+This investigation examines a phishing email impersonating Home Depot. The analysis was conducted using the email sample `email3.eml` in the TryHackMe environment.
 
-The investigation involved examining the original email, identifying the impersonated organisation, analysing sender information, inspecting raw email headers and extracting relevant indicators of compromise (IOCs).
+The investigation involved examining the original email, identifying the impersonated organisation, analysing sender information, inspecting raw email headers, and extracting relevant indicators of compromise (IOCs).
 
-The objective was to understand the email's characteristics and identify information that could assist with further security investigation.
+The objective was to understand the email's characteristics and identify information that could support further security investigation.
 
 ## 2. Investigation Environment
 
 | Category | Details |
 |---|---|
 | Platform | TryHackMe |
-| Email Sample | email3.eml |
+| Email Sample | `email3.eml` |
 | Email Client | Mozilla Thunderbird |
 | Analysis Type | Email Header Analysis |
 | Investigation Focus | Phishing and Sender Impersonation |
 
 ## 3. Home Depot Impersonation
 
-During the investigation, Home Depot was identified as the reputable organisation being impersonated in the phishing attempt.
+During the investigation, Home Depot was identified as the organisation being impersonated in the phishing email.
 
-Brand impersonation is a common phishing technique in which attackers misuse the identity of a legitimate organisation to make malicious communications appear trustworthy.
+Brand impersonation is a common phishing technique in which attackers misuse the identity of a legitimate organisation to make fraudulent communications appear trustworthy.
 
 ### Evidence 1 – Home Depot Impersonation
 
-![Home Depot Impersonation](../../images/home-depot-impersonation.png)
+![Home Depot Impersonation](../images/home-depot-impersonation.png)
 
 ## 4. Original Email Analysis
 
@@ -43,13 +43,13 @@ This discrepancy is an important observation when assessing the authenticity of 
 
 ### Evidence 2 – Original Email
 
-![Original Email](../../images/original-email.png)
+![Original Email](../images/original-email.png)
 
 ## 5. Email Header Analysis
 
 The raw email source was inspected using Thunderbird's Message Source feature.
 
-Viewing the raw message source provides access to technical email headers that are not necessarily visible in the standard inbox view.
+Viewing the raw message source provides access to technical email headers that may not be visible in the standard inbox view.
 
 One of the important fields identified during this investigation was `X-Originating-IP`.
 
@@ -67,9 +67,11 @@ The following IP address was identified:
 
 The IP address was extracted from the `X-Originating-IP` header and documented as an indicator for further investigation.
 
+Note: The presence of an IP address in this header does not independently establish that the address belongs to the attacker or that it is malicious.
+
 ### Evidence 3 – Original IP
 
-![Original IP](../../images/original-ip.png)
+![Original IP](../images/original-ip.png)
 
 ## 6. Authentication-Results Analysis
 
@@ -79,15 +81,15 @@ The identified server was:
 
 `atlas102.free.mail.gq1.yahoo.com`
 
-The Authentication-Results header provides information about email authentication checks performed by a mail system.
+The `Authentication-Results` header provides information about email authentication checks performed by a receiving mail system.
 
-This information is useful when investigating email authenticity and the infrastructure involved in message processing.
+This information can help investigators assess email authenticity and understand aspects of the infrastructure involved in message processing.
 
-The specific SPF, DKIM and DMARC outcomes would need to be examined separately before drawing conclusions about authentication.
+The specific SPF, DKIM, and DMARC outcomes would need to be examined separately before drawing conclusions about authentication.
 
 ### Evidence 4 – Authentication Results
 
-![Authentication Results](../../images/authentication-results.png)
+![Authentication Results](../images/authentication-results.png)
 
 ## 7. Indicators of Compromise (IOCs)
 
@@ -95,16 +97,16 @@ The following indicators were extracted during the investigation:
 
 | Indicator Type | Observed Value | Description |
 |---|---|---|
-| Email Address | support@teckbe.com | Identified sender address |
-| Domain | teckbe.com | Sender email domain |
-| IP Address | 103[.]234[.]236[.]83 | X-Originating-IP |
-| Mail Server | atlas102.free.mail.gq1.yahoo.com | Server identified in Authentication-Results |
+| Email Address | `support@teckbe.com` | Identified sender address |
+| Domain | `teckbe.com` | Sender email domain |
+| IP Address | `103[.]234[.]236[.]83` | Value extracted from `X-Originating-IP` |
+| Mail Server | `atlas102.free.mail.gq1.yahoo.com` | Server identified in `Authentication-Results` |
 
 These indicators can be used as starting points for further investigation and correlation with other security events.
 
 ## 8. Investigation Findings
 
-The investigation established the following findings:
+The investigation established the following observations:
 
 1. Home Depot was identified as the organisation being impersonated.
 2. The sender address was identified as `support@teckbe.com`.
@@ -117,11 +119,11 @@ The investigation established the following findings:
 
 This investigation demonstrated how email analysis and raw message headers can be used to examine a suspected phishing attempt.
 
-By reviewing the original email and inspecting its underlying message source, it was possible to identify the impersonated organisation, extract sender information, identify the originating IP address and examine the Authentication-Results header.
+By reviewing the original email and inspecting its underlying message source, it was possible to identify the impersonated organisation, extract sender information, identify an IP address from the email headers, and examine the `Authentication-Results` header.
 
 The findings highlight the importance of examining email metadata rather than relying exclusively on the information displayed in an inbox.
 
-Further analysis of email authentication outcomes, sender domain reputation and any embedded URLs would provide additional evidence for assessing the threat.
+Further analysis of email authentication outcomes, sender domain reputation, IP reputation, and any embedded URLs would provide additional evidence for assessing the threat.
 
 ## 10. Tools and Techniques
 
